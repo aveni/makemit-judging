@@ -1,0 +1,16 @@
+<div class="row col-md-10 col-md-ofset-1">
+
+	<h1>New Hack</h1>
+	<br>
+	<%= simple_form_for(@item, html:{class:'form-horizontal'}, wrapper: :horizontal_form) do |f| %>
+
+		<% f.error_notification %>
+		<%= f.input :number %>
+		<%= f.input :link %>
+		
+		<div class="row text-right" %>
+			<%= f.submit nil, class:'btn btn-primary'%>
+			<%= link_to 'Cancel', :back, class:'btn btn-default' %>
+		</div>
+	<% end %>
+</div>

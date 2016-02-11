@@ -1,0 +1,13 @@
+<div class="page-header" align="center">
+  <h1>MakeMIT 2016 Hacks!</h1>
+</div>
+<br>
+<% @items.each_slice(3) do |items| %>
+	<div class="row">
+		<% items.each do |i| %>
+			<div class="col-md-4">
+				<%= render i %>
+			</div>
+		<% end %>
+	</div>
+<% end %>
