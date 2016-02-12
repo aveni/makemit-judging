@@ -31,6 +31,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'pry-rails', '~> 0.3.2'
 gem 'devise'
 gem 'devise-bootstrap-views'
+gem 'sqlite3'
 
 
 # Use Unicorn as the app server
@@ -42,7 +43,6 @@ gem 'devise-bootstrap-views'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'sqlite3'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 end
@@ -50,7 +50,6 @@ end
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
   gem 'puma', '~> 2.15.3'
-  gem "pg"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
