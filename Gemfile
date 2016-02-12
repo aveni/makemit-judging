@@ -49,5 +49,10 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
 end
 
+group :production do
+  gem 'rails_12factor', '~> 0.0.3'
+  gem 'puma', '~> 2.15.3'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
