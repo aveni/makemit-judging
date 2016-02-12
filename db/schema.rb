@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20160211002724) do
     t.string   "name"
     t.string   "blurb"
     t.string   "pic_url"
+    t.float    "mu"
+    t.float    "sigma_sq"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -34,6 +36,8 @@ ActiveRecord::Schema.define(version: 20160211002724) do
   create_table "judges", force: :cascade do |t|
     t.string   "name"
     t.string   "affiliation"
+    t.float    "alpha"
+    t.float    "beta"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

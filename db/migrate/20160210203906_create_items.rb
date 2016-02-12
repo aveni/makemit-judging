@@ -8,6 +8,9 @@ class CreateItems < ActiveRecord::Migration
       t.string :blurb
     	t.string :pic_url
    	  
+      t.float :mu
+      t.float :sigma_sq
+      
       t.timestamps null: false
     end
   end

@@ -9,4 +9,7 @@ class Item < ActiveRecord::Base
 	validates :link, presence: true, uniqueness: true
 	validates :blurb, presence: true
 
+	validates :mu, presence: true
+	validates :sigma_sq, presence: true
+
 end

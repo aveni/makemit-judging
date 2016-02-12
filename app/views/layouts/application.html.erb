@@ -20,13 +20,21 @@
       </button>
   	<a class="navbar-brand" href= <%= root_url %>>
 		MakeMIT 2016 Hacks!
+    <% if current_judge != nil %>
+      &nbsp;<%= content_tag(:span, current_judge.email, class:'label label-success') %>
+    <% end %>
     </a>
   </div>
 
 	<div class="collapse navbar-collapse" id="navbar">
 		<ul class="nav navbar-nav navbar-right">
-			<li><%= link_to 'All Hacks', items_path %></li>
-			<li><%= link_to 'New Hack', new_item_path %></li>
+			<li><%= link_to 'Submit Hack', new_item_path %></li>
+      <% if current_judge != nil %>
+        <li><%= link_to 'My Judging', judge_path(current_judge) %></li>
+        <li><%= link_to 'Logout', destroy_judge_session_path, :method=>:delete %></li>
+      <% else %>
+        <li><%= link_to 'Judge Login', new_judge_session_path %></li>
+      <% end %>
 		</ul>
 	</div>
 

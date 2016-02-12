@@ -4,6 +4,9 @@ class DeviseCreateJudges < ActiveRecord::Migration
       ## Database authenticatable
       t.string :name
       t.string :affiliation
+
+      t.float :alpha
+      t.float :beta
       
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""

@@ -24,6 +24,8 @@ class ItemsController < ApplicationController
 			@item.name = doc.xpath('//h1[@id="app-title"]/text()')
 			@item.pic_url = doc.xpath('//img[@class="software_photo_image image-replacement"]/@src')[0]
 			@item.blurb = doc.xpath('//p[@class="large"]/text()')[0]
+			@item.mu = MU_PRIOR
+			@item.sigma_sq = SIGMA_SQ_PRIOR
 
 			if @item.save
 				redirect_to items_path, notice: 'Item successfully created'
