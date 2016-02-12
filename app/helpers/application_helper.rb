@@ -6,7 +6,7 @@ module ApplicationHelper
     end
 
     def psi(x)
-		GSL::Sf::psi(x)
+		x
     end
 
 	# via https://en.wikipedia.org/wiki/Normal_distribution
