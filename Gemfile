@@ -33,6 +33,7 @@ gem 'pry-rails', '~> 0.3.2'
 gem 'devise'
 gem 'devise-bootstrap-views'
 
+gem 'bundler'
 gem 'rb-gsl'
 
 # Use Unicorn as the app server
