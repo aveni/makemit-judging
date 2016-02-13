@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
 			if @item.save
 				redirect_to items_path, notice: 'Item successfully created'
 			else
-				render 'new'
+				render 'new', alert: "Bad Link."
 			end
 		end
 	end

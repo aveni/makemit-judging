@@ -1,0 +1,56 @@
+<% if @judge.prev and @judge.next %>
+	<div class="row">
+		<div class="col-xs-4" align="center">
+			<h2><br><br>PREVIOUS</h2>
+			<h3>#<%= @judge.prev.number %></h3>
+		</div>
+		<div class="col-xs-8">
+			<%= render @judge.prev %>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-xs-4" align="center">
+			<h2><br><br>CURRENT</h2>
+			<h3>#<%= @judge.next.number %></h3>
+		</div>
+		<div class="col-xs-8">
+			<%= render @judge.next %>
+		</div>
+	</div>
+
+	<br><br>
+	<div class="row" align="center">
+	  <h2>Which project was better?</h2>
+	</div>
+	<br><br>
+
+	<div class="row" align="center">
+		<div class="col-xs-4">
+		  <form method="post" action="/judges/<%= @judge.id %>/vote" onsubmit="return confirm('Are you sure the previous project was better?');">
+		  	<input type="hidden" name="choice" value="Previous">
+		  	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		  	<input class="btn btn-lg btn-info" type="submit" value="Previous">
+		  </form>
+		</div>
+		<div class="col-xs-4">
+	  	  <form method="post" action="/judges/<%= @judge.id %>/vote" onsubmit="return confirm('Are you sure the current project is better?');">
+		  	<input type="hidden" name="choice" value="Current">
+		  	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		  	<input class="btn btn-lg btn-success" type="submit" value="Current">
+		  </form>
+		</div>
+		<div class="col-xs-4">
+	  	  <form method="post" action="/judges/<%= @judge.id %>/vote" onsubmit="return confirm('Do you really want to skip the current project?');">
+		  	<input type="hidden" name="choice" value="Skip">
+		  	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		  	<input class="btn btn-lg btn-warning" type="submit" value="Skip">
+		  </form>
+		</div>
+	</div>
+
+
+
+<% else %>
+	<h3>Judging is not currently in session. Please wait for a MakeMIT offical to begin the judging process.</h3>
+<% end %>

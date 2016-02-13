@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
   devise_for :judges, controllers: { registrations: "registrations" }
-  resources :judges
+  resources :judges do
+    member do
+      post 'vote'
+    end
+  end
   resources :items
 
   root 'items#index'

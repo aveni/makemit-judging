@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211002724) do
+ActiveRecord::Schema.define(version: 20160212161518) do
 
   create_table "decisions", force: :cascade do |t|
     t.integer  "winner_id"
@@ -33,9 +33,16 @@ ActiveRecord::Schema.define(version: 20160211002724) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "items_judges", id: false, force: :cascade do |t|
+    t.integer "judge_id", null: false
+    t.integer "item_id",  null: false
+  end
+
   create_table "judges", force: :cascade do |t|
     t.string   "name"
     t.string   "affiliation"
+    t.integer  "prev_id"
+    t.integer  "next_id"
     t.float    "alpha"
     t.float    "beta"
     t.string   "email",                  default: "", null: false

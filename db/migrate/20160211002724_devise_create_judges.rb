@@ -5,6 +5,9 @@ class DeviseCreateJudges < ActiveRecord::Migration
       t.string :name
       t.string :affiliation
 
+      t.belongs_to :prev
+      t.belongs_to :next
+
       t.float :alpha
       t.float :beta
       

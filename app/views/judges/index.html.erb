@@ -1,0 +1,47 @@
+
+
+<table data-toggle="table" id="items_table" class='display'>
+  <thead>
+  <tr>
+    <th>Team #</th>
+    <th>Team Name</th>    
+    <th>Mu</th>    
+    <th>Sigma Sq</th>  
+  </tr>   
+  </thead>
+  <tbody>
+    <% @items.each do |i| %>
+      <tr>
+        <td><%= i.number %></td>
+        <td><%= i.name %></td>
+        <td><%= i.mu %></td>
+        <td><%= i.sigma_sq %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br><br>
+
+<table data-toggle="table" id="items_table" class='display'>
+  <thead>
+  <tr>
+    <th>Judge Name</th>
+    <th>Affiliation</th>
+    <th>Email</th>    
+    <th>Alpha</th>    
+    <th>Beta</th>  
+  </tr>   
+  </thead>
+  <tbody>
+    <% @judges.each do |j| %>
+      <tr>
+        <td><%= j.name %></td>
+        <td><%= j.affiliation %></td>
+        <td><%= j.email %></td>
+        <td><%= j.alpha %></td>
+        <td><%= j.beta %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -6,7 +6,15 @@ module ApplicationHelper
     end
 
     def psi(x)
-		x
+    	tops = [-1,-1,1,-1,1,-5,691,-1]
+    	bots = [2,12,120,252,240,660,32760,12]
+    	exps = [1,2,4,6,8,10,12,14]
+    	sum = 0
+    	for i in 0..7
+    		puts sum
+    		sum += Float(tops[i])/(bots[i]*(Float(x)**exps[i]))
+    	end
+    	sum + log(x)
     end
 
 	# via https://en.wikipedia.org/wiki/Normal_distribution
@@ -68,8 +76,8 @@ module ApplicationHelper
 	            ((alpha * exp(mu_winner) + beta * exp(mu_loser)) ** 2) -
 	            (exp(mu_winner) * exp(mu_loser)) / ((exp(mu_winner) + exp(mu_loser)) ** 2)
 
-	    updated_sigma_sq_winner = sigma_sq_winner * max(1 + sigma_sq_winner * mult, KAPPA)
-	    updated_sigma_sq_loser = sigma_sq_loser * max(1 + sigma_sq_loser * mult, KAPPA)
+	    updated_sigma_sq_winner = sigma_sq_winner * [1 + sigma_sq_winner * mult, KAPPA].max
+	    updated_sigma_sq_loser = sigma_sq_loser * [1 + sigma_sq_loser * mult, KAPPA].max
 
 	    [updated_sigma_sq_winner, updated_sigma_sq_loser]
 	end
@@ -94,5 +102,90 @@ module ApplicationHelper
 
 	    [updated_alpha, updated_beta, c]
 	end
+
+	######################################
+
+	def choose_next(annotator)
+	    items = Item.all.where("id NOT IN (?)", annotator.item_ids)
+	    items = items.shuffle
+	    if items
+	        if rand() < EPSILON
+	            items[0]
+	        else
+	        	prev = annotator.prev
+	            items.max_by{|i| expected_information_gain(
+	                annotator.alpha,
+	                annotator.beta,
+	                prev.mu,
+	                prev.sigma_sq,
+	                i.mu,
+	                i.sigma_sq)}
+	        end
+	    else
+	        nil
+	    end
+    end
+
+    def perform_vote(annotator, next_won)
+    	if next_won
+        	winner = annotator.next
+        	loser = annotator.prev
+	    else
+	        winner = annotator.prev
+	        loser = annotator.next
+	    end
+	    u_alpha, u_beta, u_winner_mu, u_winner_sigma_sq, u_loser_mu, u_loser_sigma_sq = update(
+	        annotator.alpha,
+	        annotator.beta,
+	        winner.mu,
+	        winner.sigma_sq,
+	        loser.mu,
+	        loser.sigma_sq)
+	    annotator.alpha = u_alpha
+	    annotator.beta = u_beta
+	    winner.mu = u_winner_mu
+	    winner.sigma_sq = u_winner_sigma_sq
+	    loser.mu = u_loser_mu
+	    loser.sigma_sq = u_loser_sigma_sq
+
+	    annotator.save
+	    winner.save
+	    loser.save
+	end
+
+	def resetAll()
+		Item.all.each do |i|
+			i.mu = MU_PRIOR
+			i.sigma_sq = SIGMA_SQ_PRIOR
+			i.judges = []
+			i.save
+		end
+
+		Judge.all.each do |j|
+			j.alpha = ALPHA_PRIOR
+			j.beta = BETA_PRIOR
+			j.items = []
+			j.prev_id = nil
+			j.next_id = nil
+			j.save
+		end
+
+		Decision.all.each do |d|
+			d.destroy
+		end
+	end
+
+	def startJudging()
+		Judge.all.where(prev_id:nil, next_id:nil).each do |j|
+			j.alpha = ALPHA_PRIOR
+			j.beta = BETA_PRIOR
+			j.items = []
+			j.prev = Item.all.sample(1)[0]
+			j.items << j.prev
+			j.next = choose_next(j)
+			j.save
+		end
+	end
+
 
 end
