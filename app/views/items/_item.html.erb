@@ -1,5 +1,18 @@
-<a href="<%= item.link %>" target="_blank" class="thumbnail text-center" style="text-decoration:none; color:#2c3e50;">
+<!-- <div class="thumbnail">
+<a href="<%= item.link %>" target="_blank" class="text-center" style="text-decoration:none; color:#2c3e50;">
 <h2><%= item.name %></h2>
 <h5><%= item.blurb %></h5>
 <img src=<%= item.pic_url %>>
 </a>
+</div> -->
+
+
+<div class="thumbnail">
+	<a href="<%= item.link %>" target="_blank" style="text-decoration:none;">
+	<img src="<%= item.pic_url %>">
+	<div class="caption text-center">
+		<h3><%= item.name %></h3>
+		<p><%= item.blurb %></p>
+	</div>
+	</a>
+</div>

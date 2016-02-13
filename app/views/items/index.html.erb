@@ -2,10 +2,10 @@
   <h1>MakeMIT 2016 Hacks!</h1>
 </div>
 <br>
-<% @items.each_slice(3) do |items| %>
+<% @items.each_slice(2) do |items| %>
 	<div class="row">
 		<% items.each do |i| %>
-			<div class="col-md-4">
+			<div class="col-xs-6">
 				<%= render i %>
 			</div>
 		<% end %>
