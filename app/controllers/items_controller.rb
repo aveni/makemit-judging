@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
 			@item.sigma_sq = SIGMA_SQ_PRIOR
 
 			if @item.save
-				redirect_to items_path, notice: 'Item successfully created'
+				redirect_to items_path, notice: 'Hack successfully submitted!'
 			else
 				render 'new', alert: "Bad Link."
 			end

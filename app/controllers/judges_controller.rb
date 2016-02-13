@@ -3,11 +3,15 @@ class JudgesController < ApplicationController
   include ApplicationHelper
 
   def show
-  	@judge = Judge.find(params[:id])
+    if current_judge
+  	 @judge = Judge.find(params[:id])
+    else
+      redirect_to root_path, alert: "Cannot access that page."
+    end
   end
 
   def index
-    if current_judge
+    if current_judge and current_judge.email == "team@makemit.org"
       @judges = Judge.all
       @items = Item.all.order(mu: :desc)
     else
@@ -15,6 +19,28 @@ class JudgesController < ApplicationController
     end
   end
 
+  def start
+    if current_judge and current_judge.email == "team@makemit.org"
+      startJudging()
+      redirect_to judges_path
+    else
+      redirect_to root_path, alert: "Cannot access that page."
+    end
+  end
+
+  def start
+    if current_judge and current_judge.email == "team@makemit.org"
+      j = Judge.new
+      j.name = params[:name]
+      j.affiliation = params[:affiliation]
+      j.email = params[:email]
+      puts params[:email]
+      j.save  
+      redirect_to judges_path, notice: "Judge successfully created."
+    else
+      redirect_to root_path, alert: "Cannot access that page."
+    end
+  end
 
   def vote
   	annotator = current_judge

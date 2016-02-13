@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
 
-  devise_for :judges, controllers: { registrations: "registrations" }
+  devise_for :judges
   resources :judges do
     member do
       post 'vote'
+    end
+    collection do
+      post 'start'
+      post 'signup'
     end
   end
   resources :items

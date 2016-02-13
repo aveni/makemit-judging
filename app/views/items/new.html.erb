@@ -1,16 +1,28 @@
-<div class="row col-md-10 col-md-ofset-1">
-
-	<h1>Submit Hack</h1>
+<div class="page-header" align="center">
+  <h1>MakeMIT 2016 Hack Submission</h1>
+</div>
+<br><br>
+<div class="text-center">
+	<h2>Step One: Make a Devpost</h2>
+	<h4>Devpost lets you share your hack with the world. Make an account and upload your project <a href="http://devpost.com/software" target="_blank">here</a>.<br> Make sure to include a <b>title</b>, <b>elevator pitch</b>, and a <b>picture</b>.</h4>
+	<br>
+	<br>
+	<h2>Step Two: Sign up for Sponsor Prizes</h2>
+	<h4>Our sponsors have lots of amazing prizes for relevant projects. Submit <a href="http://goo.gl/forms/1KGsigD5O7" target="_blank">this form</a> ONCE per team.</h4>
+	<br>
+	<br>
+	<h2>Step Three: Submit your Project!</h2>
+	<h4>This is it! Enter your table number and Devpost link below. Once you submit this form, you will be UNABLE TO RESUBMIT.</h4>
+</div>
+	<br>
 	<br>
 	<%= simple_form_for(@item, html:{class:'form-horizontal'}, wrapper: :horizontal_form) do |f| %>
 
 		<% f.error_notification %>
-		<%= f.input :number %>
-		<%= f.input :link %>
+		<%= f.input :number, label:"Table Number" %>
+		<%= f.input :link, label:"Devpost Link"%>
 		
 		<div class="row text-right" %>
-			<%= f.submit nil, class:'btn btn-primary'%>
-			<%= link_to 'Cancel', :back, class:'btn btn-default' %>
+			<%= f.submit "Submit Hack", class:'btn btn-lg btn-primary', data: { confirm: 'Are you sure?'  }%>
 		</div>
 	<% end %>
-</div>
