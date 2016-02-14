@@ -21,22 +21,8 @@ class JudgesController < ApplicationController
 
   def start
     if current_judge and current_judge.email == "team@makemit.org"
-      startJudging()
+      startJudging
       redirect_to judges_path
-    else
-      redirect_to root_path, alert: "Cannot access that page."
-    end
-  end
-
-  def start
-    if current_judge and current_judge.email == "team@makemit.org"
-      j = Judge.new
-      j.name = params[:name]
-      j.affiliation = params[:affiliation]
-      j.email = params[:email]
-      puts params[:email]
-      j.save  
-      redirect_to judges_path, notice: "Judge successfully created."
     else
       redirect_to root_path, alert: "Cannot access that page."
     end
