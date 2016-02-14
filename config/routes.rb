@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     end
     collection do
       post 'start'
-      post 'signup'
     end
   end
   resources :items
