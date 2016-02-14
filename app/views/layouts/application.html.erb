@@ -32,6 +32,9 @@
       <% if current_judge != nil %>
         <li><%= link_to 'My Judging', judge_path(current_judge) %></li>
         <li><%= link_to 'Logout', destroy_judge_session_path, :method=>:delete %></li>
+        <% if current_judge.email = "team@makemit.org" %>
+          <li><%= link_to 'Admin', judges_path %></li>
+        <% end %>
       <% else %>
         <li><%= link_to 'Judge Login', new_judge_session_path %></li>
       <% end %>
